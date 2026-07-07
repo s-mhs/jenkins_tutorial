@@ -9,21 +9,16 @@ pipeline {
             }
         }
 
-        stage('git info') {
-            steps {
-                sh 'git log --oneline -5'
-            }
-        }
-
-        stage('build') {
-            steps {
-                sh 'echo "Building project..."'
+        stage('install dependencies') {
+            steps{
+                sh 'pip3 install -r requirements.txt'
             }
         }
 
         stage('testing') {
             steps {
-                sh 'echo "Testing project"'
+                sh 'echo "========Testing Start========"'
+                sh 'pytest'
             }
         }
     }
