@@ -1,15 +1,29 @@
 pipeline {
     agent any
-    
+
     stages {
+        stage('repo check') {
+            steps {
+                sh 'pwd'
+                sh 'ls -la'
+            }
+        }
+
+        stage('git info') {
+            steps {
+                sh 'git log --oneline -5'
+            }
+        }
+
         stage('build') {
             steps {
-                sh 'python --version'
-                sh 'echo "Hello World"'
-                sh '''
-                echo "Multiline shell scripts work as well"
-                ls
-                '''
+                sh 'echo "Building project..."'
+            }
+        }
+
+        stage('testing') {
+            steps {
+                sh 'echo "Testing project'
             }
         }
     }
